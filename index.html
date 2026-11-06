@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BaronVonScaron | Computer Science and Cyber Operations</title>
+  <meta name="description" content="Portfolio of BaronVonScaron, Computer Science (Cyber Operations) student at Florida Tech.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg: #070b07;
+      --panel: #0d140d;
+      --line: #1d3a22;
+      --fg: #cfeccf;
+      --dim: #7c997c;
+      --g: #3dff7a;
+      --amber: #ffb454;
+      --cyan: #5ad1ff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg) radial-gradient(circle at 50% -10%, #0f2a14, transparent 55%) no-repeat;
+      color: var(--fg);
+      font: 15px/1.7 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace;
+    }
+
+    a {
+      color: var(--cyan);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--amber);
+      outline-offset: 3px;
+    }
+
+    .wrap {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .dim {
+      color: var(--dim);
+    }
+
+    .pr {
+      color: var(--g);
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(7, 11, 7, .92);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    nav .wrap {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      height: 54px;
+      overflow-x: auto;
+    }
+
+    .dots {
+      display: flex;
+      gap: 6px;
+      margin-right: 12px;
+    }
+
+    .dots i {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: #ff5f56;
+    }
+
+    .dots i:nth-child(2) {
+      background: #ffbd2e;
+    }
+
+    .dots i:nth-child(3) {
+      background: #27c93f;
+    }
+
+    nav a {
+      color: var(--dim);
+      padding: 6px 10px;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+
+    nav a:hover,
+    nav a.on {
+      color: var(--g);
+      background: #0f2214;
+      text-decoration: none;
+    }
+
+    header.hero {
+      padding: 80px 20px 24px;
+    }
+
+    h1 {
+      font-size: clamp(2.1rem, 7vw, 3.6rem);
+      line-height: 1.1;
+      margin: 14px 0 8px;
+      color: #fff;
+    }
+
+    .role {
+      color: var(--amber);
+      margin: 0 0 14px;
+    }
+
+    .lead {
+      max-width: 62ch;
+      margin: 0 0 18px;
+    }
+
+    .cur {
+      display: inline-block;
+      width: .6em;
+      height: 1.1em;
+      background: var(--g);
+      vertical-align: -.2em;
+      animation: b 1s steps(1) infinite;
+    }
+
+    @keyframes b {
+      50% { opacity: 0; }
+    }
+
+    .btn {
+      display: inline-block;
+      border: 1px solid var(--g);
+      color: var(--g);
+      padding: 8px 16px;
+      border-radius: 6px;
+      margin: 6px 10px 0 0;
+    }
+
+    .btn:hover {
+      background: var(--g);
+      color: #000;
+      text-decoration: none;
+    }
+
+    section {
+      padding: 48px 0 8px;
+    }
+
+    h2 {
+      font-size: 1.2rem;
+      margin: 0 0 20px;
+      font-weight: 700;
+    }
+
+    .win {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--panel);
+      overflow: hidden;
+    }
+
+    .bar {
+      padding: 8px 14px;
+      border-bottom: 1px solid var(--line);
+      color: var(--dim);
+      font-size: .8rem;
+    }
+
+    .body {
+      padding: 18px;
+    }
+
+    .body p {
+      margin: 0 0 12px;
+      max-width: 68ch;
+    }
+
+    .body p:last-child {
+      margin: 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 20px;
+    }
+
+    ul.plain {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    ul.plain li {
+      padding: 8px 0;
+      border-bottom: 1px dashed var(--line);
+    }
+
+    ul.plain li:last-child {
+      border: 0;
+    }
+
+    .tag {
+      display: inline-block;
+      border: 1px solid var(--line);
+      color: var(--g);
+      padding: 1px 10px;
+      border-radius: 99px;
+      font-size: .82rem;
+      margin: 3px 4px 3px 0;
+    }
+
+    .proj {
+      margin-bottom: 22px;
+    }
+
+    .proj .inner {
+      display: grid;
+      grid-template-columns: 5fr 4fr;
+    }
+
+    .shot {
+      position: relative;
+      min-height: 230px;
+      background: #08110a;
+      display: grid;
+      place-items: center;
+      padding: 12px;
+      text-align: center;
+      color: var(--dim);
+      font-size: .8rem;
+      border-right: 1px solid var(--line);
+    }
+
+    .shot img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .proj h3 {
+      margin: 0 0 8px;
+      font-size: 1.1rem;
+      color: #fff;
+    }
+
+    @media(max-width: 720px) {
+      .proj .inner {
+        grid-template-columns: 1fr;
+      }
+      .shot {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+    }
+
+    .js .reveal {
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity .5s, transform .5s;
+    }
+
+    .js .reveal.in {
+      opacity: 1;
+      transform: none;
+    }
+
+    footer {
+      padding: 50px 20px 110px;
+      color: var(--dim);
+      font-size: .85rem;
+    }
+
+    .player {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      z-index: 30;
+      background: var(--panel);
+      border: 1px solid var(--g);
+      border-radius: 10px;
+      padding: 10px 12px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      box-shadow: 0 0 22px rgba(61, 255, 122, .15);
+    }
+
+    /* Text bubble styling above the player */
+    .bubble {
+      position: absolute;
+      bottom: calc(100% + 10px);
+      right: 0;
+      background: var(--panel);
+      border: 1px solid var(--g);
+      color: var(--g);
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      white-space: nowrap;
+      box-shadow: 0 0 10px rgba(61, 255, 122, 0.15);
+      animation: bubble-bounce 2s ease-in-out infinite;
+    }
+
+    @keyframes bubble-bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+
+    .player button {
+      background: none;
+      border: 1px solid var(--g);
+      color: var(--g);
+      font: inherit;
+      padding: 4px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      min-width: 92px;
+    }
+
+    .player button:hover {
+      background: var(--g);
+      color: #000;
+    }
+
+    .player small {
+      display: block;
+      color: var(--dim);
+      line-height: 1.2;
+      font-size: .72rem;
+      margin-bottom: 4px;
+      max-width: 150px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .player input {
+      width: 110px;
+      accent-color: var(--g);
+      vertical-align: middle;
+    }
+
+    @media(max-width: 520px) {
+      .player {
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+        justify-content: space-between;
+      }
+    }
+
+    @media(prefers-reduced-motion: reduce) {
+      .cur {
+        animation: none;
+      }
+      .js .reveal {
+        transition: none;
+      }
+      .bubble {
+        animation: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav aria-label="Main">
+    <div class="wrap">
+      <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+      <a href="#top" class="on">~/home</a>
+      <a href="#about">~/About</a>
+      <a href="#skills">~/Skills</a>
+      <a href="#projects">~/Projects</a>
+      <a href="#contact">~/Contact/Info</a>
+    </div>
+  </nav>
+
+  <header class="hero wrap" id="top">
+    <div class="pr">Baron@fit:~$ <span id="cmd"></span><span class="cur"></span></div>
+    <h1>BaronVonScaron</h1>
+    <p class="role">Computer Science, B.S. | Cyber Operations | Florida Institute of Technology</p>
+    <p class="lead">I am learning cybersecurity by developing new skills, using fundamentals I know, creating new projects, and taking courses to teach me new topics.</p>
+    <a class="btn" href="#projects">View projects</a>
+    <a class="btn" href="#contact">Get in touch</a>
+  </header>
+
+  <main class="wrap">
+    
+    <section id="about" class="reveal">
+      <h2><span class="pr">$</span> cat aboutme.md</h2>
+      <div class="grid">
+        <div class="win">
+          <div class="bar">aboutme.md</div>
+          <div class="body">
+            <p>I'm a Computer Science student at Florida Tech on the Cyber Operations track. I'm building a strong foundation in Linux, programming, and offensive security fundamentals.</p>
+            <p>I learn fastest by doing: lab environments, hands-on challenges, and real projects with real users in mind.</p>
+          </div>
+        </div>
+        <div class="win">
+          <div class="bar">certifications.log</div>
+          <div class="body">
+            <ul class="plain">
+              <li><b>Security+</b><br><span class="dim">COMPTIA, WIP</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="reveal">
+      <h2><span class="pr">$</span> ls ~/skills</h2>
+      <div class="grid">
+        <div class="win">
+          <div class="bar">languages/</div>
+          <div class="body">
+            <span class="tag">Python</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">HTML/CSS</span>
+            <span class="tag">Bash</span>
+            <span class="tag">C++</span>
+          </div>
+        </div>
+        <div class="win">
+          <div class="bar">security/</div>
+          <div class="body">
+            <span class="tag">Pentesting basics</span>
+            <span class="tag">CTF challenges</span>
+            <span class="tag">Linux hardening</span>
+            <span class="tag">Operating Systems</span>
+            <span class="tag">Security Basics</span>
+          </div>
+        </div>
+        <div class="win">
+          <div class="bar">tools/</div>
+          <div class="body">
+            <span class="tag">Linux</span>
+            <span class="tag">Git</span>
+            <span class="tag">Ethical Use of SI</span>
+            <span class="tag">VS Code</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="reveal">
+      <h2><span class="pr">$</span> ls ~/projects</h2>
+      
+      <article class="win proj">
+        <div class="bar">projects/Network_Traffic_Visualizer</div>
+        <div class="inner">
+          <div class="shot">
+            add assets/project-1.png
+            <img src="assets/project-1.png" alt="TradeScope screenshot" onerror="this.style.display='none'">
+          </div>
+          <div class="body">
+            <h3>NTV</h3>
+            <p>Capture live packets with Scapy, then render the traffic in real time as a 3D scene instead of a dashboard: packets as light trails, TCP handshakes as pulses, port scans as bursts.</p>
+            <p>
+              <span class="tag">JavaScript</span>
+              <span class="tag">Python</span>
+              <span class="tag">Networking</span>
+            </p>
+            <a class="btn" href="https://github.com/BaronVonScaron" target="_blank" rel="noopener">Open project</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="win proj">
+        <div class="bar">projects/Honeypot_Attack_Dashboard</div>
+        <div class="inner">
+          <div class="shot">
+            add assets/project-2.png
+            <img src="assets/project-2.png" alt="Kali Linux lab screenshot" onerror="this.style.display='none'">
+          </div>
+          <div class="body">
+            <h3>HoneypotV1</h3>
+            <p>Deploy a SSH honeypot on an Oracle Cloud Always Free instance to capture real internet attacker behavior, then render the attacks live on a map/globe.</p>
+            <p>
+              <span class="tag">Python</span>
+              <span class="tag">Javascript</span>
+              <span class="tag">Bash</span>
+              <span class="tag">Networking</span>
+              <span class="tag">Linux</span>
+            </p>
+            <a class="btn" href="https://github.com/BaronVonScaron" target="_blank" rel="noopener">Open project</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="win proj">
+        <div class="bar">projects/Market_Manipulator</div>
+        <div class="inner">
+          <div class="shot">
+            add assets/project-3.png
+            <img src="assets/project-3.png" alt="pwn.college progress screenshot" onerror="this.style.display='none'">
+          </div>
+          <div class="body">
+            <h3>2xM</h3>
+            <p>Pull free market tick data from a futures or equities API and build a statistical anomaly detector for unusual price/volume action — a proxy for the spoofing/layering patterns real exchange surveillance systems catch.</p>
+            <p>
+              <span class="tag">Python</span>
+              <span class="tag">Finances</span>
+              <span class="tag">API</span>
+              <span class="tag">Data Analysis</span>
+            </p>
+            <a class="btn" href="https://github.com/BaronVonScaron" target="_blank" rel="noopener">Open project</a>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section id="contact" class="reveal">
+      <h2><span class="pr">$</span> ./contact.sh</h2>
+      <div class="win">
+        <div class="bar">contact.sh</div>
+        <div class="body">
+          <p>Open to internships, fulltime positions, and conversations about security and software.</p>
+          <a class="btn" href="mailto:amofwork@gmail.com">Email</a>
+          <a class="btn" href="https://github.com/BaronVonScaron" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="wrap">
+    Baron@fit:~$ echo "&copy; <span id="yr"></span> BaronVonScaron" <span class="cur"></span>
+  </footer>
+
+  <div class="player" role="group" aria-label="Background music">
+    <div id="bubble" class="bubble">Click to play music!</div>
+    <audio id="bgm" src="assets/9InTheAfternoon.mp3" loop preload="auto"></audio>
+    <div>
+      <small id="track">Now playing: My Favorite Song :D</small>
+      <input id="vol" type="range" min="0" max="1" step="0.01" value="0.05" aria-label="Volume">
+    </div>
+    <button id="play" type="button" aria-label="Play music">&#9654; play</button>
+  </div>
+
+  <script>
+    document.documentElement.classList.add('js');
+    const $ = s => document.querySelector(s),
+          reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
+    
+    $('#yr').textContent = new Date().getFullYear();
+
+    /* Typing effect */
+    (function() {
+      const el = $('#cmd'), t = 'whoami';
+      let i = 0;
+      if (reduce) { el.textContent = t; return; }
+      (function k() {
+        el.textContent = t.slice(0, ++i);
+        if (i < t.length) setTimeout(k, 110);
+      })();
+    })();
+
+    /* Smooth scroll control: eased glide to any #section link */
+    function glide(y, ms = 750) {
+      const s = scrollY, d = y - s;
+      if (reduce || !d) { scrollTo(0, y); return; }
+      const t0 = performance.now(),
+            ease = p => p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+      (function f(n) {
+        const p = Math.min(1, (n - t0) / ms);
+        scrollTo(0, s + d * ease(p));
+        if (p < 1) requestAnimationFrame(f);
+      })(t0);
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
+      const el = $(a.getAttribute('href'));
+      if (!el) return;
+      e.preventDefault();
+      glide(Math.max(0, el.getBoundingClientRect().top + scrollY - 54));
+      history.pushState(null, '', a.getAttribute('href'));
+    }));
+
+    /* Highlight the nav link for the section in view, reveal sections */
+    const links = [...document.querySelectorAll('nav a')];
+    const spy = new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting) links.forEach(l => l.classList.toggle('on', l.getAttribute('href') === '#' + e.target.id));
+    }), { rootMargin: '-40% 0px -55% 0px' });
+    
+    document.querySelectorAll('header,section').forEach(s => spy.observe(s));
+    
+    const rev = new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); rev.unobserve(e.target); }
+    }), { threshold: .08 });
+    
+    document.querySelectorAll('.reveal').forEach(s => rev.observe(s));
+
+    /* Music player: play/pause with smooth fades, volume slider */
+    const audio = $('#bgm'), btn = $('#play'), vol = $('#vol'), bubble = $('#bubble');
+    let playing = false, armed = true, fid;
+    audio.volume = 0;
+
+    function fadeTo(v, ms = 700, done) {
+      clearInterval(fid);
+      const from = audio.volume, t0 = performance.now();
+      fid = setInterval(() => {
+        const p = Math.min(1, (performance.now() - t0) / ms);
+        audio.volume = Math.min(1, Math.max(0, from + (v - from) * p));
+        if (p === 1) { clearInterval(fid); done && done(); }
+      }, 30);
+    }
+
+    const ui = () => {
+      btn.innerHTML = playing ? '&#10074;&#10074; pause' : '&#9654; play';
+      btn.setAttribute('aria-label', playing ? 'Pause music' : 'Play music');
+    };
+
+    const start = () => {
+      if (!audio.paused) return; // Prevent race conditions/interruptions if already playing
+      audio.play().then(() => { 
+        playing = true; 
+        if (bubble) bubble.style.display = 'none'; 
+        ui(); 
+        fadeTo(+vol.value); 
+      }).catch(err => { 
+        if (err.name !== 'AbortError') { 
+          playing = false; 
+          ui(); 
+        } 
+      });
+    };
+
+    const stop = () => { playing = false; ui(); fadeTo(0, 400, () => audio.pause()); };
+
+    btn.onclick = () => { armed = false; playing ? stop() : start(); };
+    vol.oninput = () => { if (playing) { clearInterval(fid); audio.volume = +vol.value; } };
+    audio.addEventListener('error', () => { $('#track').textContent = 'Add assets/music.mp3'; });
+
+    /* Browsers block autoplay, so music begins on the first click, tap, or key press */
+    const evs = ['pointerdown', 'keydown', 'touchstart'];
+    const first = e => {
+      evs.forEach(n => removeEventListener(n, first));
+      if (armed && !playing && !(e.target.closest && e.target.closest('.player'))) start();
+    };
+    
+    evs.forEach(n => addEventListener(n, first, { passive: true }));
+    ui();
+  </script>
+
+</body>
+</html>
